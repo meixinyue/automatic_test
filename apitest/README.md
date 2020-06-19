@@ -8,8 +8,8 @@
 安装 [Allure](http://allure.qatools.ru/) 并完成环境变量配置      
 `注：安装 Allure 用于生成 Allure 的测试报告，不安装可以直接使用 xml 格式的测试报告`           
 ### 三、使用方法    
-1、将 `autotest` 目录保存到本地     
-2、打开 `autotest` 目录下 `config.py` 文件修改定义的常量的值      
+1、将 `apitest` 目录保存到本地     
+2、打开 `apitest` 目录下 `config.py` 文件修改定义的常量的值      
 （1）修改 `base_url` 的值为测试目标的 `协议+IP` 或 `协议+域名`   
 （2）修改  `username` 和 `password` 的值为测试目标的账号密码        
 ```
@@ -49,7 +49,7 @@ password = "admin"
 |assert|断言|列表类型，可添加多个|
 
 4、运行生成 `xml` 测试报告      
-在 `autotest` 目录下运行 `start.py` 文件。运行完成后，会在当前目录生成名为 `junit` 的目录，在 `junit` 目录下 有 `xml` 格式的测试报告。若存在同名文件时，生成的目录名称会发生改变。也可自定义测试报告的存储路径和文件名，在 `junit.py` 中进行设置。
+在 `apitest` 目录下运行 `start.py` 文件。运行完成后，会在当前目录生成名为 `junit` 的目录，在 `junit` 目录下 有 `xml` 格式的测试报告。若存在同名文件时，生成的目录名称会发生改变。也可自定义测试报告的存储路径和文件名，在 `junit.py` 中进行设置。
 ```
         files = ('junit',)
         # 创建文件夹
