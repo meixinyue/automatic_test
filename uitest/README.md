@@ -10,5 +10,5 @@
 `tsconfig.json` 为 `typescript` 的配置文件    
 ##### （2）测试用例   
 文件名后缀包含 `.test.` 的文件，如 `search.test.ts`   
-##### (3)方法  
+##### （3）方法 
 `actions` 目录下的文件，如 `search.ts`       
