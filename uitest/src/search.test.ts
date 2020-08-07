@@ -22,7 +22,7 @@ describe('百度搜索',()=>{
         await expect(pageTitle).toMatch('百度');
     })
 
-    test('Test:002: 搜索内容'　,async() =>{
+    test('Test-002: 搜索内容'　,async() =>{
         let searchaction = new searchAction();
         await searchaction.searchinfo(page,'博客');
 
