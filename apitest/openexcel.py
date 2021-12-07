@@ -24,4 +24,4 @@ class Read_Ex:
                 j += 1
                 httpurl_data.append(d)
 
-            return httpurl_data
+        return httpurl_data
