@@ -16,10 +16,10 @@ class TestCase:
 
         request_type = ['get', 'post', 'options', 'head', 'delete', 'put', 'connect']
 
-        if self.url is None:
+        if self.url == '':
             raise InputsError('接口数据不对，缺少url')
         else:
-            if self.type is not None:
+            if self.type != '':
                 if self.type.lower() not in request_type:
                     raise InputsError('请求类型输入不正确,输入为：' + self.type)
             else:
