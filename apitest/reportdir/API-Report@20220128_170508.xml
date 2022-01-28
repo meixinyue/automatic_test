@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<testsuites>
+		<testsuite name="接口测试" tests="3" time="3.092583" timestamp="2022-01-28T17:05:08.185521">
+			<testcase name="登录" priority="M" time="1.046251">
+				<failure message="标题：登录  请求类型：post   失败原因：qqq断言失败" type="Failure"/>
+			</testcase>
+			<testcase name="百度" priority="M" time="2.034366"/>
+			<testcase name="ceshi" priority="M" time="0.0">
+				<skipped message="This testcase is skipped"/>
+			</testcase>
+		</testsuite>
+	</testsuites>

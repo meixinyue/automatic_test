@@ -55,19 +55,17 @@ class Report:
         self.testsuite.setAttribute('time', '%s' % td_time)
         self.testsuites.appendChild(self.testsuite)
 
-        files = (reportdir, )
-        for k in files:
-            path = Path(k)
-            if path.is_file():
-                index = '(0)'
-                for i in range(1, 10):
-                    index = '(' + str(i) + ')'
-                    path = Path(k + index)
-                    if not path.is_file():
-                        break
+        path = Path(reportdir)
+        if path.is_file():
+            index = '(0)'
+            for i in range(1, 10):
+                index = '(' + str(i) + ')'
+                path = Path(reportdir + index)
+                if not path.is_file():
+                    break
 
-            if not path.is_dir():
-                path.mkdir()
+        if not path.is_dir():
+            path.mkdir()
 
         file = path / ('API-Report@' + self.nowtime + '.xml')
         f = open(file, 'w', encoding='utf-8')

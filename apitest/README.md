@@ -10,17 +10,16 @@
 ### 三、使用方法    
 1、将 `apitest` 目录保存到本地     
 2、打开 `apitest` 目录下 `config.py` 文件修改定义的常量的值      
-（1）修改 `excelfile` 的值为存放测试用例Excel的路径   
-（2）修改  `sheetname` 的值为测试目标的表名    
-（3）修改 `reportdir` 的值为存放测试报告的文件夹名       
+（1）修改 `base_url` 的值为测试目标的 `协议+IP` 或 `协议+域名`   
+（2）修改  `username` 和 `password` 的值为测试目标的账号密码        
 ```
-excelfile = './apitest.xls'                    #测试用例的excel文件位置和Sheet页名称
-sheetname = 'Sheet1'
+base_url = 'http://192.168.200.115:8989/'
 
-reportdir = 'reportdir'                        #存放xml测试报告的文件夹名称
+username = "admin"
+password = "admin"
 ```       
 3、添加接口测试用例       
-打开文件 `apitest.xls` 文件。`httpurl_data` 为存放测试用例的列表，列表每一个类型为字典的值表示一条测试用例，添加测试用例只需要按照模板添加字典类型的数据即可       
+打开文件`apidata.py` 。`httpurl_data` 为存放测试用例的列表，列表每一个类型为字典的值表示一条测试用例，添加测试用例只需要按照模板添加字典类型的数据即可    
 ```
     # 1.登录接口 第一条用例
     {'title': '登录接口',  # 用例的名称
@@ -41,40 +40,21 @@ reportdir = 'reportdir'                        #存放xml测试报告的文件�
 |用例属性|意义|备注|
 |-----|-----------|----|
 |title|测试用例标题|可以不存在|
-|skip|跳过用例|true为跳过，其他均为不跳过，正常执行|
+|skip|跳过用例|bool类型，True为跳过，False不跳过，正常执行|
 |url|接口地址|不存在时抛出异常|
-|headers|接口请求头信息|json格式，可以不存在|
-|payload|接口携带参数|json格式，可以不存在|
+|headers|接口请求头信息|可以不存在|
+|payload|接口携带参数|可以不存在|
 |type|请求类型|支持 get,post,options,head,delete,put,connect,不区分大小写，不存在时抛出异常|    
-|time|执行用例前等待的时间|单位为秒|
-|assert|断言|可添加多个，通过 `/` 分割|
+|time|执行用例前等待的时间|单位为秒,int类型|
+|assert|断言|列表类型，可添加多个|
 
 4、运行生成 `xml` 测试报告      
-在 `apitest` 目录下运行 `start.py` 文件。运行完成后，会在当前目录生成名为 `junit` 的目录，在 `junit` 目录下 有 `xml` 格式的测试报告。若存在同名文件时，生成的目录名称会发生改变。也可自定义测试报告的存储路径和文件名，在 `junit.py` 中进行设置。
+在 `apitest` 目录下运行 `start.py` 文件。运行完成后，会生成存放测试报告的目录和 `xml` 格式的测试报告，目录名在 `config.py` 模块配置。
 ```
-        files = ('junit',)
-        # 创建文件夹
-        for k in files:
-            path = Path(k)
-            index = '(0)'
-            
-            if path.is_file():
-                for i in range(1,10):
-                    if path.is_file():
-                        index = '('+str(i)+')'
-                        path = Path(k+index)
-                    else:
-                        break
-            else:
-                    path = Path(k)
+    excelfile = './apitest.xls'                    #测试用例的excel文件位置和Sheet页名称
+    sheetname = 'Sheet1'
 
-            if not path.is_dir():
-                path.mkdir()
-
-        file = path / ('API' + '-' + 'ReportJunit@' + self.nowtime + '.xml')   #xml文件名
-        f = open(file, 'w')
-        self.doc.writexml(f, indent='\t', newl='\n', addindent='\t', encoding='gbk')
-        f.close())
+    reportdir = 'reportdir'                        #存放xml测试报告的文件夹名称
 ```
 5、生成 `Allure` 格式的测试报告       
-若安装 `Allure` 并配置好了环境变量，可在生成 `xml` 测试报告后，使用命令 `allure serve junit` 生成 `Allure` 格式的测试报告。命令中的 `junit` 为 `xml` 测试报告的路径，存在同名文件时目录名称会发生变化，具体要以实际生成的目录名为准。若在 `junit.py` 进行了修改，这里也需要做相应改变
+若安装 `Allure` 并配置好了环境变量，可在生成 `xml` 测试报告后，使用命令 `allure serve reportdir` 生成 `Allure` 格式的测试报告。命令中的 `reportdir` 为 `xml` 测试报告的路径。
